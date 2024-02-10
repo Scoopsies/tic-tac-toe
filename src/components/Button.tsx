@@ -1,11 +1,11 @@
-import { newGame } from "../functions/functions"
 import { ButtonProps } from "../Types/types"
 
-const Button = ({setGameState, setWinLose, winLose} : ButtonProps) => {
+const Button = ({setGameState, setWinLose, winLose, newGame} : ButtonProps) => {
+
   return (
     <div className='buttonContainer'>
         <button className='button' onClick={() => {
-          setGameState(newGame())
+          setGameState(newGame)
           setWinLose('')
         }}>
             {winLose ? 'New Game' : 'Reset'}

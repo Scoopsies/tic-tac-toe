@@ -22,7 +22,7 @@ const Board = ({
           <button 
             key={index} 
             className='square' 
-            disabled={winLose != ''} 
+            disabled={winLose != '' || gameState[index] != index} 
             onClick={() => handleSelectSquare(index)}
           >
             {value === index ? '' : value}

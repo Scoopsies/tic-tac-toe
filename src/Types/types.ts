@@ -24,7 +24,8 @@ export type ResultProps = {
 export type ButtonProps = {
     setGameState: React.Dispatch<React.SetStateAction<(string | number)[]>>,
     setWinLose: React.Dispatch<React.SetStateAction<string>>,
-    winLose: string
+    winLose: string,
+    newGame: number[]
 }
 
 

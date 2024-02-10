@@ -11,14 +11,17 @@
     height: 100px;
     width: 100px;
     font-size: 5rem;
+    background-color: white;
 }
 
 button:hover {
     cursor: pointer;
+    background-color: cornsilk;
 }
 
 button:disabled {
     color: black;
+    background-color: white;
 }
 
 .buttonContainer {
