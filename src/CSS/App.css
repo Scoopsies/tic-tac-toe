@@ -27,3 +27,19 @@ button:disabled {
     width: 300px;
     padding-top: 1rem;
 }
+
+.results {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.resultCounter,
+.resultMessage {
+    display: flex;
+    justify-content: space-around;
+    width: 300px
+}

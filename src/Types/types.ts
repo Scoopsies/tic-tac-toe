@@ -12,4 +12,19 @@ export type WinLose = {
     setWinLose : React.Dispatch<React.SetStateAction<string>>
 }
 
+export type ResultProps = {
+    resultCounter: {
+        wins: number;
+        losses: number;
+        ties: number;
+    },
+    winLose : string
+}
+
+export type ButtonProps = {
+    setGameState: React.Dispatch<React.SetStateAction<(string | number)[]>>,
+    setWinLose: React.Dispatch<React.SetStateAction<string>>,
+    winLose: string
+}
+
 

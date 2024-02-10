@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { newGame } from './functions/functions';
 import './CSS/App.css';
 import Board from './components/Board';
+import Results from './components/Results';
+import Button from './components/Button';
 
 function App() {
 
@@ -30,8 +32,7 @@ function App() {
     }))
   }, [winLose])
 
-
-
+  
   return (
     <div>
       <Board 
@@ -41,24 +42,16 @@ function App() {
       setWinLose = {setWinLose}
       />
 
-      <div>
-        {winLose}
-      </div>
+      <Results 
+      winLose={winLose}
+      resultCounter={resultCounter}
+      />
 
-      <div className='resultCounter'>
-        <div>{`wins: ${resultCounter.wins}`}</div>
-        <div>{`losses: ${resultCounter.losses}`}</div>
-        <div>{`ties: ${resultCounter.ties}`}</div>
-      </div>
-
-      <div className='buttonContainer'>
-        <button className='button' onClick={() => {
-          setGameState(newGame())
-          setWinLose('')
-        } }>
-          {winLose ? 'New Game' : 'Reset'}
-        </button>
-      </div>
+      <Button
+      setGameState={setGameState}
+      setWinLose={setWinLose}
+      winLose={winLose}
+      />
     </div>
   );
 }
