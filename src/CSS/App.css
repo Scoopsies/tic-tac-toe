@@ -1,0 +1,29 @@
+.board {
+    border: solid black 2px;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    border: solid black 2px;
+    height: 100px;
+    width: 100px;
+    font-size: 5rem;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    color: black;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    padding-top: 1rem;
+}
