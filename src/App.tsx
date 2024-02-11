@@ -22,11 +22,12 @@ function App() {
       ...prevState,
       wins: prevState.wins++
     }))
-    else if (winLose === 'You Lose') setResultCounter(prevState => ({
+    if (winLose === 'You Lose') setResultCounter(prevState => ({
       ...prevState,
       losses: prevState.losses++
     }))
-    else if (winLose === 'Draw') setResultCounter(prevState => ({
+    if (winLose === 'You Lose') console.log('winLose triggered')
+    if (winLose === 'Draw') setResultCounter(prevState => ({
       ...prevState,
       ties: prevState.ties++
     }))

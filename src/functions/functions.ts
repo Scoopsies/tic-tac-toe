@@ -14,7 +14,7 @@ export const computersTurn = (gameState: Gamestate) => {
   })
   if (imediateWins.length) {
     console.log('imediate win found')
-    return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Win'}
+    return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Lose'}
   } 
   
   const computersMove = aiLogic(gameState)
