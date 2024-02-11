@@ -1,15 +1,18 @@
 import React from "react"
 
-export type GameState = {
-    gameState : ( 'x' | 'o' | number)[],
-    setGameState : React.Dispatch<React.SetStateAction<('x' | 'o' | number)[]>>,
-    setWinLose : React.Dispatch<React.SetStateAction<string>>,
-    winLose : string
+export type GameState = ('x' | 'o' | number)[]
+export type WinLose = ('You Win' | 'You Lose' | 'Draw' | '')
+
+export type BoardProps = {
+    gameState: GameState,
+    setGameState: React.Dispatch<React.SetStateAction<('x' | 'o' | number)[]>>,
+    setWinLose: React.Dispatch<React.SetStateAction<WinLose>>, 
+    winLose: WinLose 
 }
 
-export type WinLose = {
+export type ComputersReturn = {
     winLose : string,
-    setWinLose : React.Dispatch<React.SetStateAction<string>>
+    setWinLose : React.Dispatch<React.SetStateAction<WinLose>>
 }
 
 export type ResultProps = {
@@ -18,12 +21,12 @@ export type ResultProps = {
         losses: number;
         ties: number;
     },
-    winLose : string
+    winLose : WinLose
 }
 
 export type ButtonProps = {
     setGameState: React.Dispatch<React.SetStateAction<( 'x' | 'o' | number)[]>>,
-    setWinLose: React.Dispatch<React.SetStateAction<string>>,
+    setWinLose: React.Dispatch<React.SetStateAction<WinLose>>,
     winLose: string,
     newGame: number[]
 }
