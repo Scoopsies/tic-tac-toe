@@ -20,16 +20,16 @@ function App() {
   useEffect(() => { //Increments result counter when game is over.
     if (winLose === 'You Win') setResultCounter(prevState => ({
       ...prevState,
-      wins: prevState.wins++
+      wins: prevState.wins + 1
     }))
     if (winLose === 'You Lose') setResultCounter(prevState => ({
       ...prevState,
-      losses: prevState.losses++
+      losses: prevState.losses + 1
     }))
     if (winLose === 'You Lose') console.log('winLose triggered')
     if (winLose === 'Draw') setResultCounter(prevState => ({
       ...prevState,
-      ties: prevState.ties++
+      ties: prevState.ties + 1
     }))
   }, [winLose])
 
