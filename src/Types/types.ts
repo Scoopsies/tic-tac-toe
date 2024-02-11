@@ -1,8 +1,8 @@
 import React from "react"
 
 export type GameState = {
-    gameState : (string | number)[],
-    setGameState : React.Dispatch<React.SetStateAction<(string | number)[]>>,
+    gameState : ( 'x' | 'o' | number)[],
+    setGameState : React.Dispatch<React.SetStateAction<('x' | 'o' | number)[]>>,
     setWinLose : React.Dispatch<React.SetStateAction<string>>,
     winLose : string
 }
@@ -22,7 +22,7 @@ export type ResultProps = {
 }
 
 export type ButtonProps = {
-    setGameState: React.Dispatch<React.SetStateAction<(string | number)[]>>,
+    setGameState: React.Dispatch<React.SetStateAction<( 'x' | 'o' | number)[]>>,
     setWinLose: React.Dispatch<React.SetStateAction<string>>,
     winLose: string,
     newGame: number[]
