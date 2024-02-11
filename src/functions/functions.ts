@@ -1,4 +1,25 @@
-type Gamestate = (string | number)[]
+type Gamestate = ('x' | 'o' | number)[]
+
+export const computersTurn = (gameState: Gamestate) => {
+  const gameOver = checkWin(gameState)
+  if (gameOver) return {gameState , winStatus : gameOver} // Computer doesn't go again if human wins.
+
+
+  // Checks if imediate win is possible and takes it.
+  const availableMoves = gameState.filter(value => value !== 'x' && value !== 'o');
+  const imediateWins : number[] = []
+  availableMoves.forEach(move => {
+    const instantWinCheck = selectSquare(gameState, move as number, 'o')
+    if (checkWin(instantWinCheck) === 'You Lose') imediateWins.push(move)
+  })
+  if (imediateWins.length) {
+    console.log('imediate win found')
+    return {gameState: selectSquare(gameState, imediateWins[0], 'o')}
+  } 
+  
+  const computersMove = aiLogic(gameState)
+  return {gameState: computersMove, winStatus : checkWin(computersMove)}
+};
 
 export const checkWin = (gameState: Gamestate) => {
   const winConditions = [
@@ -34,14 +55,6 @@ export const selectSquare = (gameState: Gamestate, posistion: number, player : '
   const board = [...gameState];
   board[posistion] = player;
   return board;
-};
-
-export const computersTurn = (gameState: Gamestate) => {
-  const gameOver = checkWin(gameState)
-  if (gameOver) return {gameState , winStatus : gameOver} // Computer doesn't go again.
-  
-  const computersMove = aiLogic(gameState)
-  return {gameState: computersMove, winStatus : checkWin(computersMove)}
 };
 
 export const aiLogic = (gameState: Gamestate) => {  
