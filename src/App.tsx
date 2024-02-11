@@ -16,7 +16,7 @@ function App() {
       ties : 0
     }
   )
-
+    console.log(resultCounter)
   useEffect(() => { //Increments result counter when game is over.
     if (winLose === 'You Win') setResultCounter(prevState => ({
       ...prevState,

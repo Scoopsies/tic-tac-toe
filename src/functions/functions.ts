@@ -6,16 +6,16 @@ export const computersTurn = (gameState: Gamestate) => {
 
 
   // Checks if imediate win is possible and takes it.
-  // const availableMoves = gameState.filter(value => value !== 'x' && value !== 'o');
-  // const imediateWins : number[] = []
-  // availableMoves.forEach(move => {
-  //   const instantWinCheck = selectSquare(gameState, move as number, 'o')
-  //   if (checkWin(instantWinCheck) === 'You Lose') imediateWins.push(move as number)
-  // })
-  // if (imediateWins.length) {
-  //   console.log('imediate win found')
-  //   return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Lose'}
-  // } 
+  const availableMoves = gameState.filter(value => value !== 'x' && value !== 'o');
+  const imediateWins : number[] = []
+  availableMoves.forEach(move => {
+    const instantWinCheck = selectSquare(gameState, move as number, 'o')
+    if (checkWin(instantWinCheck) === 'You Lose') imediateWins.push(move as number)
+  })
+  if (imediateWins.length) {
+    console.log('imediate win found')
+    return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Lose'}
+  } 
   
   const computersMove = aiLogic(gameState)
   return {gameState: computersMove, winStatus : checkWin(computersMove)}
