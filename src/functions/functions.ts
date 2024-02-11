@@ -23,9 +23,9 @@ export const computersTurn = (gameState: GameState):{ gameState: GameState; winS
 
 export const checkWin = (gameState: GameState) => {
   const winConditions = [
-    [0, 1, 2], [3, 4, 5],[6, 7, 8], //Rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], //Columns
-    [0, 4, 8], [2, 4, 6]
+    [0, 1, 2], [3, 4, 5],[6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6] // Diagnals
   ]
 
   let winStatus = ''
@@ -35,7 +35,7 @@ export const checkWin = (gameState: GameState) => {
     if (!condition.filter(value => gameState[value] !== 'o').length) winStatus = 'You Lose' //Computer wins
     else if (!availabileMoves(gameState).length) winStatus = 'Draw'
   })
-  
+
   return winStatus as WinLose;
 }
 
@@ -66,7 +66,7 @@ const miniMax = (gameState : GameState, player : 'x' | 'o') => {
   if (checkWin(gameState) === 'You Lose') return 1; // Computer / o wins
   if (checkWin(gameState) === 'Draw') return 0;
 
-  if (player === 'o') { //Computer / Max player
+  if (player === 'o') { // Computer / Max player
     let bestScore = -Infinity;
     availabileMoves(gameState).forEach(move => {
       const newBoard = selectSquare(gameState, move as number, 'o');
@@ -76,7 +76,7 @@ const miniMax = (gameState : GameState, player : 'x' | 'o') => {
     return bestScore;
   }
 
-  let bestScore = Infinity; //Human / Min player
+  let bestScore = Infinity; // Human / Min player
   availabileMoves(gameState).forEach(move => {
     const newBoard = selectSquare(gameState, move as number, 'x');
     const score = miniMax(newBoard, 'o');
