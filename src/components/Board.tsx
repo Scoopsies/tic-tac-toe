@@ -1,18 +1,18 @@
 import { selectSquare, computersTurn } from "../functions/functions"
-import { GameState } from "../Types/types";
+import { BoardProps} from "../Types/types";
 
 const Board = ({
   gameState, 
   setGameState, 
   winLose,
   setWinLose
-} : GameState) => {
+} : BoardProps) => {
 
   const handleSelectSquare = (num: number) => {
     const humansMove = selectSquare(gameState, num, 'x');
-    const compMove = computersTurn(humansMove)
+    const compMove = computersTurn(humansMove);
     setGameState(compMove.gameState);
-    setWinLose(compMove.winStatus)
+    setWinLose(compMove.winStatus);
   };
 
   return (
