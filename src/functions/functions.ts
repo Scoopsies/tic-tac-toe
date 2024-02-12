@@ -49,10 +49,14 @@ export const aiLogic = (gameState: GameState) => {
   let bestMove = -Infinity;
   let bestMoveIndex = -1;
 
+
   availabileMoves(gameState).forEach(move => {
     const newBoard = selectSquare(gameState, move as number, 'o');
     const score = miniMax(newBoard, 'x');
-    if (score > bestMove) {
+    if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
+      bestMoveIndex = move as number
+    }
+    else if (score > bestMove) {
       bestMove = score;
       bestMoveIndex = move as number;
     }
