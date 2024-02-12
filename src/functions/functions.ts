@@ -17,15 +17,21 @@ export const checkWin = (gameState: GameState) => {
     [0, 4, 8], [2, 4, 6] // Diagnals
   ]
 
-  let winStatus = ''
+  for (let i = 0; i < winConditions.length; i++) {
+    const first = winConditions[i][0];
+    const second = winConditions[i][1]
+    const third = winConditions[i][2]
 
-  winConditions.forEach((condition) => { 
-    if (!condition.filter(value => gameState[value] !== 'x').length) winStatus = 'You Win'  //Human wins
-    if (!condition.filter(value => gameState[value] !== 'o').length) winStatus = 'You Lose' //Computer wins
-    else if (!availabileMoves(gameState).length) winStatus = 'Draw'
-  })
+    if (gameState[first] === gameState[second] && gameState[second] === gameState[third]) {
+      return gameState[first] === 'x' ? 'You Win' : 'You Lose'
+    }
+    
+  }
 
-  return winStatus as WinLose;
+  if (!availabileMoves(gameState).length) return 'Draw';
+
+  return '';
+
 }
 
 export const selectSquare = (gameState: GameState, posistion: number, player : 'x' | 'o') => {
@@ -62,8 +68,8 @@ export const aiLogic = (gameState: GameState) => {
 }
 
 const miniMax = (gameState : GameState, player : 'x' | 'o') => {
-  if (checkWin(gameState) === 'You Win') return -1; // Human / x wins
-  if (checkWin(gameState) === 'You Lose') return 1; // Computer / o wins
+  if (checkWin(gameState) === 'You Win') return -10; // Human / x wins
+  if (checkWin(gameState) === 'You Lose') return 10; // Computer / o wins
   if (checkWin(gameState) === 'Draw') return 0;
 
   if (player === 'o') { // Computer / Max player
