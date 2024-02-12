@@ -1,6 +1,6 @@
 import { GameState, WinLose } from "../Types/types";
 
-const availabileMoves = (gameState: GameState) => gameState.filter(value => value !== 'x' && value !== 'o')
+const availabileMoves = (gameState: GameState) => gameState.filter(value => value !== 'x' && value !== 'o') as number[]
 
 export const computersTurn = (gameState: GameState):{ gameState: GameState; winStatus: WinLose } => {
   // Computer doesn't go again if human wins.
@@ -41,18 +41,18 @@ export const aiLogic = (gameState: GameState) => {
   let bestMoveIndex = -1;
 
   availabileMoves(gameState).forEach(move => {
-    const newBoard = selectSquare(gameState, move as number, 'o');
+    const newBoard = selectSquare(gameState, move, 'o');
     const score = miniMax(newBoard, 'x');
 
     if (checkWin(newBoard) === 'You Lose') {
-      winMove = move as number
+      winMove = move
     }
-    if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
-      blockMove = move as number
+    if (checkWin(selectSquare(gameState, move, 'x')) === 'You Win') {
+      blockMove = move
     } 
     if (score > bestMove) {
       bestMove = score;
-      bestMoveIndex = move as number;
+      bestMoveIndex = move;
     }
   })
 
@@ -69,7 +69,7 @@ const miniMax = (gameState : GameState, player : 'x' | 'o') => {
   if (player === 'o') { // Computer / Max player
     let bestScore = -Infinity;
     availabileMoves(gameState).forEach(move => {
-      const newBoard = selectSquare(gameState, move as number, 'o');
+      const newBoard = selectSquare(gameState, move, 'o');
       const score = miniMax(newBoard, 'x');
       bestScore = Math.max(bestScore, score);
     });
@@ -78,7 +78,7 @@ const miniMax = (gameState : GameState, player : 'x' | 'o') => {
 
   let bestScore = Infinity; // Human / Min player
   availabileMoves(gameState).forEach(move => {
-    const newBoard = selectSquare(gameState, move as number, 'x');
+    const newBoard = selectSquare(gameState, move, 'x');
     const score = miniMax(newBoard, 'o');
     bestScore = Math.min(bestScore, score);
   });
