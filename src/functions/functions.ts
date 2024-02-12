@@ -6,15 +6,15 @@ export const computersTurn = (gameState: GameState):{ gameState: GameState; winS
   // Computer doesn't go again if human wins.
   if (checkWin(gameState)) return {gameState , winStatus : checkWin(gameState)} 
 
-  // Checks if next move can result in win and takes it if so.
-  const imediateWins : number[] = []
-  availabileMoves(gameState).forEach(move => {
-    const instantWinCheck = selectSquare(gameState, move as number, 'o')
-    if (checkWin(instantWinCheck) === 'You Lose') imediateWins.push(move as number)
-  })
-  if (imediateWins.length) {
-    return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Lose'}
-  } 
+  // // Checks if next move can result in win and takes it if so.
+  // const imediateWins : number[] = []
+  // availabileMoves(gameState).forEach(move => {
+  //   const instantWinCheck = selectSquare(gameState, move as number, 'o')
+  //   if (checkWin(instantWinCheck) === 'You Lose') imediateWins.push(move as number)
+  // })
+  // if (imediateWins.length) {
+  //   return {gameState: selectSquare(gameState, imediateWins[0], 'o'), winStatus : 'You Lose'}
+  // } 
   
   // Returns best possible move if imediate win can't be played.
   const computersMove = aiLogic(gameState)
@@ -48,15 +48,28 @@ export const selectSquare = (gameState: GameState, posistion: number, player : '
 export const aiLogic = (gameState: GameState) => {  
   let bestMove = -Infinity;
   let bestMoveIndex = -1;
-
+  let winBlock = -1;
+  availabileMoves(gameState).forEach(move => {
+    if (checkWin(selectSquare(gameState, move as number, 'o')) === 'You Win') {
+      winBlock = move as number
+    }
+    else if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
+      winBlock = move as number
+    }
+  })
+  if (winBlock !== -1) return selectSquare(gameState, winBlock, 'o')
 
   availabileMoves(gameState).forEach(move => {
     const newBoard = selectSquare(gameState, move as number, 'o');
     const score = miniMax(newBoard, 'x');
-    if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
-      bestMoveIndex = move as number
-    }
-    else if (score > bestMove) {
+
+    // if (checkWin(selectSquare(gameState, move as number, 'o')) === 'You Win') {
+    //   bestMoveIndex = move as number
+    // }
+    // else if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
+    //   bestMoveIndex = move as number
+    // }
+    if (score > bestMove) {
       bestMove = score;
       bestMoveIndex = move as number;
     }
