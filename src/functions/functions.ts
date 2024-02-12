@@ -35,34 +35,30 @@ export const selectSquare = (gameState: GameState, posistion: number, player : '
 };
 
 export const aiLogic = (gameState: GameState) => {  
-  let bestMove = -1;
-  let bestMoveIndex = -1;
   let winMove = -1;
   let blockMove = -1;
+  let bestMove = -1;
+  let bestMoveIndex = -1;
+
   availabileMoves(gameState).forEach(move => {
     const newBoard = selectSquare(gameState, move as number, 'o');
+    const score = miniMax(newBoard, 'x');
 
     if (checkWin(newBoard) === 'You Lose') {
       winMove = move as number
     }
     if (checkWin(selectSquare(gameState, move as number, 'x')) === 'You Win') {
       blockMove = move as number
-    }
-  })
-  if (winMove !== -1) return selectSquare(gameState, winMove, 'o')
-  if (blockMove !== -1) return selectSquare(gameState, blockMove, 'o')
-
-  availabileMoves(gameState).forEach(move => {
-    const newBoard = selectSquare(gameState, move as number, 'o');
-    const score = miniMax(newBoard, 'x');
-
+    } 
     if (score > bestMove) {
       bestMove = score;
       bestMoveIndex = move as number;
     }
-  });
+  })
 
-  return selectSquare(gameState, bestMoveIndex, 'o');
+  if (winMove !== -1) return selectSquare(gameState, winMove, 'o') // Returns move if imediate win
+  if (blockMove !== -1) return selectSquare(gameState, blockMove, 'o') // Returns move if block
+  return selectSquare(gameState, bestMoveIndex, 'o'); // Returns best move if none others possible
 }
 
 const miniMax = (gameState : GameState, player : 'x' | 'o') => {
